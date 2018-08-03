@@ -20,32 +20,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="foK-Vk-AAQ" userLabel="Search Panel">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="84"/>
-                                <subviews>
-                                    <searchBar userInteractionEnabled="NO" contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="YFQ-U7-cpK">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="56"/>
-                                        <gestureRecognizers/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </searchBar>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <gestureRecognizers/>
-                                <constraints>
-                                    <constraint firstItem="YFQ-U7-cpK" firstAttribute="leading" secondItem="foK-Vk-AAQ" secondAttribute="leading" id="F2y-98-3AM"/>
-                                    <constraint firstAttribute="bottom" secondItem="YFQ-U7-cpK" secondAttribute="bottom" id="Uyl-8x-Apb"/>
-                                    <constraint firstItem="YFQ-U7-cpK" firstAttribute="top" secondItem="foK-Vk-AAQ" secondAttribute="topMargin" id="gnO-ik-olG"/>
-                                    <constraint firstAttribute="trailing" secondItem="YFQ-U7-cpK" secondAttribute="trailing" id="jGk-77-yDk"/>
-                                </constraints>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="j8k-tl-Ol8" appends="YES" id="AWR-zu-R0k"/>
-                                </connections>
-                            </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rUN-yo-uB8">
                                 <rect key="frame" x="0.0" y="84" width="375" height="583"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ph0-YB-8jS">
-                                        <rect key="frame" x="8" y="8" width="359" height="166"/>
+                                        <rect key="frame" x="8" y="15" width="359" height="166"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="jqT-ZT-a98" userLabel="Weather Box">
                                                 <rect key="frame" x="8" y="8" width="343" height="150"/>
@@ -91,17 +70,64 @@
                                             <constraint firstItem="jqT-ZT-a98" firstAttribute="top" secondItem="Ph0-YB-8jS" secondAttribute="top" constant="8" id="hQG-0z-Nhv"/>
                                         </constraints>
                                     </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bEl-q5-yhh">
+                                        <rect key="frame" x="8" y="191" width="359" height="40"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show weather for my location" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iu4-26-aWd">
+                                                <rect key="frame" x="0.0" y="0.0" width="359" height="40"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="iu4-26-aWd" secondAttribute="trailing" id="3MG-mW-AjO"/>
+                                            <constraint firstAttribute="bottom" secondItem="iu4-26-aWd" secondAttribute="bottom" id="4cu-Ft-fO2"/>
+                                            <constraint firstItem="iu4-26-aWd" firstAttribute="leading" secondItem="bEl-q5-yhh" secondAttribute="leading" id="dpA-bk-Roz"/>
+                                            <constraint firstItem="iu4-26-aWd" firstAttribute="top" secondItem="bEl-q5-yhh" secondAttribute="top" id="tMF-UE-T5M"/>
+                                            <constraint firstAttribute="height" constant="40" id="u29-TM-LXO"/>
+                                        </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="SQi-DZ-dvi" appends="YES" id="zGF-Iu-kgr"/>
+                                        </connections>
+                                    </view>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="bEl-q5-yhh" firstAttribute="trailing" secondItem="Ph0-YB-8jS" secondAttribute="trailing" id="2OS-Vf-2I0"/>
                                     <constraint firstItem="Ph0-YB-8jS" firstAttribute="centerX" secondItem="rUN-yo-uB8" secondAttribute="centerX" id="7ud-bn-qA8"/>
                                     <constraint firstAttribute="bottom" secondItem="Ph0-YB-8jS" secondAttribute="bottom" id="Qey-Tx-vHb"/>
-                                    <constraint firstItem="Ph0-YB-8jS" firstAttribute="top" secondItem="rUN-yo-uB8" secondAttribute="top" constant="8" id="Tpt-6H-6Hc"/>
+                                    <constraint firstItem="Ph0-YB-8jS" firstAttribute="top" secondItem="rUN-yo-uB8" secondAttribute="top" constant="15" id="Tpt-6H-6Hc"/>
                                     <constraint firstItem="Ph0-YB-8jS" firstAttribute="leading" secondItem="rUN-yo-uB8" secondAttribute="leading" constant="8" id="bL4-ea-PNS"/>
                                     <constraint firstAttribute="trailing" secondItem="Ph0-YB-8jS" secondAttribute="trailing" constant="8" id="p2z-nF-x91"/>
+                                    <constraint firstItem="bEl-q5-yhh" firstAttribute="leading" secondItem="Ph0-YB-8jS" secondAttribute="leading" id="tgB-Ll-8CE"/>
+                                    <constraint firstItem="bEl-q5-yhh" firstAttribute="top" secondItem="Ph0-YB-8jS" secondAttribute="bottom" constant="10" id="w3b-nr-IsI"/>
                                 </constraints>
                             </scrollView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="foK-Vk-AAQ" userLabel="Search Panel">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="84"/>
+                                <subviews>
+                                    <searchBar userInteractionEnabled="NO" contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="YFQ-U7-cpK">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="56"/>
+                                        <gestureRecognizers/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </searchBar>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstItem="YFQ-U7-cpK" firstAttribute="leading" secondItem="foK-Vk-AAQ" secondAttribute="leading" id="F2y-98-3AM"/>
+                                    <constraint firstAttribute="bottom" secondItem="YFQ-U7-cpK" secondAttribute="bottom" id="Uyl-8x-Apb"/>
+                                    <constraint firstItem="YFQ-U7-cpK" firstAttribute="top" secondItem="foK-Vk-AAQ" secondAttribute="topMargin" id="gnO-ik-olG"/>
+                                    <constraint firstAttribute="trailing" secondItem="YFQ-U7-cpK" secondAttribute="trailing" id="jGk-77-yDk"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="j8k-tl-Ol8" appends="YES" id="AWR-zu-R0k"/>
+                                </connections>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.95686274509803926" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94509803921568625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="rUN-yo-uB8" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="Ds1-bV-idv"/>
                             <constraint firstItem="rUN-yo-uB8" firstAttribute="top" secondItem="foK-Vk-AAQ" secondAttribute="bottom" id="WUM-Lj-KYq"/>
@@ -115,16 +141,23 @@
                     </view>
                     <connections>
                         <outlet property="cityName" destination="1gG-d0-xF4" id="clM-gS-CK2"/>
+                        <outlet property="locationWeatherButton" destination="bEl-q5-yhh" id="h12-Na-ylH"/>
                         <outlet property="scrollView" destination="rUN-yo-uB8" id="kJi-9k-wBM"/>
+                        <outlet property="searchPanel" destination="foK-Vk-AAQ" id="JsV-zH-faV"/>
                         <outlet property="temperature" destination="6pE-KF-Ktq" id="vzE-00-poo"/>
                         <outlet property="weatherBackgroundView" destination="Ph0-YB-8jS" id="3gw-Fc-njo"/>
                         <outlet property="weatherImage" destination="Pen-lY-b3L" id="DOJ-7S-4EZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="j8k-tl-Ol8">
+                <tapGestureRecognizer id="j8k-tl-Ol8" userLabel="Search ">
                     <connections>
                         <segue destination="CPf-VD-PKD" kind="presentation" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="uvH-ut-wyI"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="SQi-DZ-dvi" userLabel="Current location weather">
+                    <connections>
+                        <action selector="currentLocationWeather:" destination="BYZ-38-t0r" id="4B7-CT-pS8"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -223,7 +256,7 @@
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kdd-17-H8T" userLabel="Dismiss background">
                                 <rect key="frame" x="0.0" y="184" width="375" height="483"/>
-                                <color key="backgroundColor" red="0.52397287436548223" green="0.52397287436548223" blue="0.52397287436548223" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.52397287436548223" green="0.52397287436548223" blue="0.52397287436548223" alpha="0.0088024400684931503" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="UfV-C3-Qvx" appends="YES" id="ZBe-uD-k28"/>
                                 </connections>

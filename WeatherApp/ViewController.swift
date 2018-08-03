@@ -9,6 +9,8 @@
 import UIKit
 import ReactiveCocoa
 import ReactiveSwift
+import AlamofireImage
+import CoreLocation
 
 class ViewController: UIViewController {
 
@@ -18,7 +20,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var weatherImage: UIImageView!
     @IBOutlet weak var temperature: UILabel!
     
+    @IBOutlet weak var searchPanel: UIView!
     let currentWeatherData = MutableProperty<WeaterData>(WeaterData())
+    let locationManager = CLLocationManager()
+    
+    @IBOutlet weak var locationWeatherButton: UIView!
     
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -30,20 +36,42 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         scrollView.addSubview(refreshControl)
+        
+        
         weatherBackgroundView.layer.cornerRadius = 10.0
+//        weatherBackgroundView.layer.shadowRadius = 3.0
+//        weatherBackgroundView.layer.masksToBounds = false
+//        weatherBackgroundView.layer.shadowColor = UIColor.black.cgColor
+//        weatherBackgroundView.layer.shadowOffset = CGSize(width: 0, height: 0)
+//        weatherBackgroundView.layer.shadowOpacity = 0.2
+//        weatherBackgroundView.layer.shadowPath = UIBezierPath(rect: weatherBackgroundView.bounds).cgPath
+
+        
+        locationWeatherButton.layer.cornerRadius = 10.0
+        
+        cityName.reactive.text <~ currentWeatherData.signal.map { $0.city }
+        temperature.reactive.text <~ currentWeatherData.signal.map { $0.temperature }
+        weatherImage.reactive.image <~ currentWeatherData.map { $0.image }.flatten(FlattenStrategy.latest)
+        
+        searchPanel.layer.shadowRadius = 4.0
+        searchPanel.layer.masksToBounds = false
+        searchPanel.layer.shadowColor = UIColor.black.cgColor
+        searchPanel.layer.shadowOffset = CGSize(width: 0, height: 2)
+        searchPanel.layer.shadowOpacity = 0.2
+        
+        currentWeatherData.signal
+            .map { $0.id }
+            .observeValues { UserDefaults.standard.set($0, forKey: "location") }
+        
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+
         refresh()
-        cityName.reactive.text <~ currentWeatherData.signal.map { $0.city.value }
-        temperature.reactive.text <~ currentWeatherData.signal.map { $0.temperature.value }
-        currentWeatherData.signal.observeValues { [weak self] weatherData in
-            weatherData.imageSignalProducer.value.startWithValues { image in
-                self?.weatherImage.image = image
-                }
-        }
     }
     
     func refresh() {
         WeatherNetworker
-            .loadDataReact(with: "https://api.openweathermap.org/data/2.5/weather?q=London,uk&units=metric&appid=9adc5a90fbbca24bbcef96af05b8b5e1")
+            .getData(for: .urlWithCityId, arguments: UserDefaults.standard.object(forKey: "location") as! String)
             .startWithValues { weatherData in
                 self.currentWeatherData.value = weatherData
         }
@@ -54,6 +82,10 @@ class ViewController: UIViewController {
         refreshControl.endRefreshing()
     }
     
+    @IBAction func currentLocationWeather(_ sender: UITapGestureRecognizer) {
+        locationManager.requestLocation()
+
+    }
     // MARK: - Navigation
      
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -64,5 +96,26 @@ class ViewController: UIViewController {
         searchVC.parentVC = self
     }
  
+}
+
+extension ViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let coodinates = locations.first?.coordinate else {
+            return
+        }
+        WeatherNetworker
+            .getData(for: WeatherNetworker.RequestType.urlWithCoordinates, arguments: coodinates.latitude.description, coodinates.longitude.description)
+            .startWithValues { (weatherData: WeaterData) in
+                self.currentWeatherData.value = weatherData
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+//        WeatherNetworker
+//            .getData(for: WeatherNetworker.RequestType.urlWithCityName, arguments: "London,UK")
+//            .startWithValues { weatherData in
+//                self.currentWeatherData.value = weatherData
+//        }
+    }
 }
 

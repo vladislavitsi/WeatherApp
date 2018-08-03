@@ -31,23 +31,17 @@ class SearchViewController: UIViewController {
         table.delegate = self
         
         tableViewHeight.constant = 0.0
-        
-        // Do any additional setup after loading the view.
-//        searchBar.reactive.textDidBeginEditing.observeValues { [weak self] in
-//            self?.searchBar.showsCancelButton = true
-//        }
-//        searchBar.reactive.textDidEndEditing.observeValues { [weak self] in
-//            self?.searchBar.showsCancelButton = false
-//        }
-        searchBar.reactive.continuousTextValues
+
+         searchBar.reactive.continuousTextValues
             .skipNil()
             .filter { $0.isEmpty == false }
             .throttle(0.5, on: QueueScheduler.main)
-            .observeValues{ value in
-                WeatherNetworker.searchData(with: value).startWithValues { [weak self] searchResult in
+            .observeValues { value in
+                WeatherNetworker.getData(for: .searchUrl, arguments: value).startWithValues { [weak self] (searchResult: SearchResult) in
                     self?.searchResults.weatherDataCollection.value = searchResult.weatherDataCollection.value
                 }
             }
+        
         searchBar.reactive.continuousTextValues
             .skipNil()
             .filter { $0.isEmpty }
@@ -69,6 +63,9 @@ class SearchViewController: UIViewController {
         super.viewWillAppear(animated)
         searchBar.becomeFirstResponder()
     }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
 }
 
 extension SearchViewController: UITableViewDataSource {
@@ -81,13 +78,7 @@ extension SearchViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         let weatherData = searchResults.weatherDataCollection.value[indexPath.row]
-        cell.cityAndCountry.text = weatherData.city.value + ", " + weatherData.country.value
-        cell.temperature.text = weatherData.temperature.value + "°"
-        cell.weatherDescription.text = weatherData.weatherDescription.value
-        weatherData.imageSignalProducer.value
-            .startWithValues { image in
-                cell.imageIcon.image = image
-            }
+        cell.viewModel.value = weatherData
         return cell
     }
 }

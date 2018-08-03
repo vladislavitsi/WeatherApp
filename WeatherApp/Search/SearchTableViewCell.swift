@@ -7,14 +7,38 @@
 //
 
 import UIKit
+import ReactiveSwift
+import ReactiveCocoa
 
 class SearchTableViewCell: UITableViewCell {
 
+    var i = 0
+    
     @IBOutlet weak var cityAndCountry: UILabel!
     @IBOutlet weak var weatherDescription: UILabel!
     @IBOutlet weak var temperature: UILabel!
     @IBOutlet weak var imageIcon: UIImageView!
 
+    let viewModel = MutableProperty<WeaterData>(WeaterData())
+    
+    func bindViewModel () {
+        cityAndCountry.reactive.text <~ viewModel.signal.map { "\($0.city), \($0.country)" }
+        weatherDescription.reactive.text <~ viewModel.signal.map { $0.weatherDescription }
+        temperature.reactive.text <~ viewModel.signal.map { $0.temperature + "°" }
+        imageIcon.reactive.image <~ viewModel.map { $0.image }.flatten(FlattenStrategy.latest)
+    }
+    override func didMoveToSuperview() {
+        bindViewModel()
+    }
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
     override func prepareForReuse() {
         cityAndCountry.text = ""
         weatherDescription.text = ""
