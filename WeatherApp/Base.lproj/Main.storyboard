@@ -21,7 +21,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rUN-yo-uB8">
-                                <rect key="frame" x="0.0" y="84" width="375" height="583"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="583"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ph0-YB-8jS">
                                         <rect key="frame" x="8" y="15" width="359" height="166"/>
@@ -106,10 +106,10 @@
                                 </constraints>
                             </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="foK-Vk-AAQ" userLabel="Search Panel">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="84"/>
+                                <rect key="frame" x="0.0" y="603" width="375" height="64"/>
                                 <subviews>
                                     <searchBar userInteractionEnabled="NO" contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="YFQ-U7-cpK">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="56"/>
+                                        <rect key="frame" x="0.0" y="8" width="375" height="56"/>
                                         <gestureRecognizers/>
                                         <textInputTraits key="textInputTraits"/>
                                     </searchBar>
@@ -117,10 +117,10 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstItem="YFQ-U7-cpK" firstAttribute="leading" secondItem="foK-Vk-AAQ" secondAttribute="leading" id="F2y-98-3AM"/>
-                                    <constraint firstAttribute="bottom" secondItem="YFQ-U7-cpK" secondAttribute="bottom" id="Uyl-8x-Apb"/>
-                                    <constraint firstItem="YFQ-U7-cpK" firstAttribute="top" secondItem="foK-Vk-AAQ" secondAttribute="topMargin" id="gnO-ik-olG"/>
-                                    <constraint firstAttribute="trailing" secondItem="YFQ-U7-cpK" secondAttribute="trailing" id="jGk-77-yDk"/>
+                                    <constraint firstAttribute="trailing" secondItem="YFQ-U7-cpK" secondAttribute="trailing" id="FIa-fa-4gz"/>
+                                    <constraint firstItem="YFQ-U7-cpK" firstAttribute="leading" secondItem="foK-Vk-AAQ" secondAttribute="leading" id="bfb-rh-F8K"/>
+                                    <constraint firstAttribute="height" constant="64" id="poa-yL-jQo"/>
+                                    <constraint firstAttribute="bottom" secondItem="YFQ-U7-cpK" secondAttribute="bottom" id="ptc-Oe-MXC"/>
                                 </constraints>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="j8k-tl-Ol8" appends="YES" id="AWR-zu-R0k"/>
@@ -129,12 +129,12 @@
                         </subviews>
                         <color key="backgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94509803921568625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="rUN-yo-uB8" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="Ds1-bV-idv"/>
-                            <constraint firstItem="rUN-yo-uB8" firstAttribute="top" secondItem="foK-Vk-AAQ" secondAttribute="bottom" id="WUM-Lj-KYq"/>
-                            <constraint firstItem="foK-Vk-AAQ" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="dPs-eg-5Nc"/>
-                            <constraint firstItem="foK-Vk-AAQ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="oOQ-GZ-lkq"/>
+                            <constraint firstItem="foK-Vk-AAQ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="2BE-Oz-1fc"/>
+                            <constraint firstItem="foK-Vk-AAQ" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="5Kd-vl-4cl"/>
+                            <constraint firstItem="rUN-yo-uB8" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="SLo-vj-PTs"/>
+                            <constraint firstItem="foK-Vk-AAQ" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="WKC-pT-hId"/>
                             <constraint firstItem="rUN-yo-uB8" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="skG-pT-kje"/>
-                            <constraint firstAttribute="top" secondItem="foK-Vk-AAQ" secondAttribute="top" id="tkU-7G-dTr"/>
+                            <constraint firstItem="foK-Vk-AAQ" firstAttribute="top" secondItem="rUN-yo-uB8" secondAttribute="bottom" id="xcA-M1-Gzy"/>
                             <constraint firstItem="rUN-yo-uB8" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="xqZ-L3-5yy"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -172,10 +172,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uJs-vA-TpW" userLabel="Search Panel">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="84"/>
+                                <rect key="frame" x="0.0" y="100" width="375" height="64"/>
                                 <subviews>
                                     <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="WKa-uf-zgJ">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="56"/>
+                                        <rect key="frame" x="0.0" y="8" width="375" height="56"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </searchBar>
                                 </subviews>
@@ -184,15 +184,13 @@
                                     <constraint firstAttribute="bottom" secondItem="WKa-uf-zgJ" secondAttribute="bottom" id="C0V-rj-nlb"/>
                                     <constraint firstAttribute="trailing" secondItem="WKa-uf-zgJ" secondAttribute="trailing" id="L9T-fw-zA8"/>
                                     <constraint firstItem="WKa-uf-zgJ" firstAttribute="top" secondItem="uJs-vA-TpW" secondAttribute="topMargin" id="roU-8D-Fnm"/>
+                                    <constraint firstAttribute="height" constant="64" id="sOZ-wn-cIQ"/>
                                     <constraint firstItem="WKa-uf-zgJ" firstAttribute="leading" secondItem="uJs-vA-TpW" secondAttribute="leading" id="sqG-y7-ew0"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Q9K-jZ-TLm">
-                                <rect key="frame" x="0.0" y="84" width="375" height="100"/>
+                                <rect key="frame" x="0.0" y="164" width="375" height="503"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="LFk-ik-Uas"/>
-                                </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchCell" rowHeight="70" id="kKF-lC-KSv" customClass="SearchTableViewCell" customModule="WeatherApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="70"/>
@@ -255,8 +253,8 @@
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kdd-17-H8T" userLabel="Dismiss background">
-                                <rect key="frame" x="0.0" y="184" width="375" height="483"/>
-                                <color key="backgroundColor" red="0.52397287436548223" green="0.52397287436548223" blue="0.52397287436548223" alpha="0.0088024400684931503" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="UfV-C3-Qvx" appends="YES" id="ZBe-uD-k28"/>
                                 </connections>
@@ -266,14 +264,15 @@
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="uJs-vA-TpW" firstAttribute="leading" secondItem="z5P-74-1cD" secondAttribute="leading" id="1oK-R5-QGn"/>
+                            <constraint firstItem="Kdd-17-H8T" firstAttribute="trailing" secondItem="z5P-74-1cD" secondAttribute="trailing" id="EjR-Dt-5IN"/>
+                            <constraint firstItem="Kdd-17-H8T" firstAttribute="top" secondItem="ttm-24-xdr" secondAttribute="top" id="EwU-qe-WLM"/>
                             <constraint firstItem="Q9K-jZ-TLm" firstAttribute="top" secondItem="uJs-vA-TpW" secondAttribute="bottom" id="LqF-S2-PXA"/>
+                            <constraint firstItem="z5P-74-1cD" firstAttribute="bottom" secondItem="Q9K-jZ-TLm" secondAttribute="bottom" id="RTY-x6-kgC"/>
+                            <constraint firstItem="Kdd-17-H8T" firstAttribute="leading" secondItem="z5P-74-1cD" secondAttribute="leading" id="RoG-Qi-h6b"/>
                             <constraint firstItem="uJs-vA-TpW" firstAttribute="trailing" secondItem="z5P-74-1cD" secondAttribute="trailing" id="W9l-hX-0RI"/>
-                            <constraint firstItem="uJs-vA-TpW" firstAttribute="top" secondItem="ttm-24-xdr" secondAttribute="top" id="XNl-9s-OEL"/>
-                            <constraint firstItem="Kdd-17-H8T" firstAttribute="top" secondItem="Q9K-jZ-TLm" secondAttribute="bottom" id="Ysi-Vx-AXU"/>
-                            <constraint firstItem="Kdd-17-H8T" firstAttribute="leading" secondItem="z5P-74-1cD" secondAttribute="leading" id="baL-gh-qF9"/>
-                            <constraint firstItem="Kdd-17-H8T" firstAttribute="trailing" secondItem="z5P-74-1cD" secondAttribute="trailing" id="pfM-2l-20s"/>
+                            <constraint firstItem="uJs-vA-TpW" firstAttribute="top" secondItem="ttm-24-xdr" secondAttribute="top" constant="100" id="XNl-9s-OEL"/>
+                            <constraint firstItem="uJs-vA-TpW" firstAttribute="top" secondItem="Kdd-17-H8T" secondAttribute="bottom" id="fjA-Sb-6Aw"/>
                             <constraint firstItem="z5P-74-1cD" firstAttribute="trailing" secondItem="Q9K-jZ-TLm" secondAttribute="trailing" id="qBR-0W-IQC"/>
-                            <constraint firstItem="z5P-74-1cD" firstAttribute="bottom" secondItem="Kdd-17-H8T" secondAttribute="bottom" id="zWB-O8-dUq"/>
                             <constraint firstItem="Q9K-jZ-TLm" firstAttribute="leading" secondItem="z5P-74-1cD" secondAttribute="leading" id="zbN-sh-SDO"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="z5P-74-1cD"/>
@@ -281,7 +280,6 @@
                     <connections>
                         <outlet property="searchBar" destination="WKa-uf-zgJ" id="8WO-Xh-OUM"/>
                         <outlet property="table" destination="Q9K-jZ-TLm" id="Juq-Co-RbI"/>
-                        <outlet property="tableViewHeight" destination="LFk-ik-Uas" id="zC7-af-939"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MYY-ge-Y60" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -291,7 +289,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="945" y="118"/>
+            <point key="canvasLocation" x="944.79999999999995" y="117.39130434782609"/>
         </scene>
     </scenes>
 </document>

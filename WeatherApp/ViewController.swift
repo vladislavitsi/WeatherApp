@@ -14,6 +14,9 @@ import CoreLocation
 
 class ViewController: UIViewController {
 
+    
+    let transition = SearchViewAnimator()
+    
     @IBOutlet weak var weatherBackgroundView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var cityName: UILabel!
@@ -93,6 +96,7 @@ class ViewController: UIViewController {
         guard let searchVC = segue.destination as? SearchViewController else {
             return
         }
+        searchVC.transitioningDelegate = self
         searchVC.parentVC = self
     }
  
@@ -118,4 +122,35 @@ extension ViewController: CLLocationManagerDelegate {
 //        }
     }
 }
+
+extension ViewController: UIViewControllerTransitioningDelegate {
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        transition.originFrame = searchPanel.frame
+        
+        transition.presenting = true
+        
+        return transition
+    }
+    
+    func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        transition.originFrame = searchPanel.frame
+        
+        transition.presenting = true
+        
+        return transition
+
+    }
+    
+    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        transition.presenting = false
+        return transition
+    }
+    
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        transition.presenting = false
+        return transition
+    }
+}
+
 

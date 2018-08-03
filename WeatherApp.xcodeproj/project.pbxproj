@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		32932717211484560084EDDD /* SearchViewAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32932716211484560084EDDD /* SearchViewAnimator.swift */; };
 		32EA00002112E9C40098C0BC /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32EAFFFF2112E9C40098C0BC /* SearchViewController.swift */; };
 		32EA00032112F1E80098C0BC /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32EA00022112F1E80098C0BC /* WeatherData.swift */; };
 		32EA00052112F4770098C0BC /* WeatherNetworker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32EA00042112F4770098C0BC /* WeatherNetworker.swift */; };
@@ -23,6 +24,7 @@
 /* Begin PBXFileReference section */
 		1ABF1E56E4ABFE9F7CA65AE3 /* Pods-WeatherApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WeatherApp/Pods-WeatherApp.debug.xcconfig"; sourceTree = "<group>"; };
 		25266DA2DFD0E42D7494D7A3 /* Pods_WeatherApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeatherApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		32932716211484560084EDDD /* SearchViewAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewAnimator.swift; sourceTree = "<group>"; };
 		32EA00022112F1E80098C0BC /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
 		32EA00042112F4770098C0BC /* WeatherNetworker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherNetworker.swift; sourceTree = "<group>"; };
 		32EA0008211323800098C0BC /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				32EA000B2113239F0098C0BC /* Network */,
 				32EAFFF12111F5130098C0BC /* Main.storyboard */,
 				32EA00012112EBA00098C0BC /* Support */,
+				32932716211484560084EDDD /* SearchViewAnimator.swift */,
 			);
 			path = WeatherApp;
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 				32EAFFF02111F5130098C0BC /* ViewController.swift in Sources */,
 				32EAFFEE2111F5130098C0BC /* AppDelegate.swift in Sources */,
 				32EA000D2113377B0098C0BC /* SearchTableViewCell.swift in Sources */,
+				32932717211484560084EDDD /* SearchViewAnimator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

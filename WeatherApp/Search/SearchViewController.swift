@@ -18,7 +18,6 @@ class SearchViewController: UIViewController {
     weak var parentVC: ViewController?
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var table: UITableView!
-    @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
     
     let searchResults = SearchResult()
 
@@ -30,7 +29,6 @@ class SearchViewController: UIViewController {
         table.dataSource = self
         table.delegate = self
         
-        tableViewHeight.constant = 0.0
 
          searchBar.reactive.continuousTextValues
             .skipNil()
@@ -51,12 +49,7 @@ class SearchViewController: UIViewController {
         searchResults.weatherDataCollection.signal
             .observe {[weak self] _ in
                 self?.table.reloadData()
-                self?.updateTableHigh()
             }
-    }
-    
-    func updateTableHigh() {
-        tableViewHeight.constant = cellHeight * CGFloat(searchResults.weatherDataCollection.value.count)
     }
 
     override func viewWillAppear(_ animated: Bool) {
