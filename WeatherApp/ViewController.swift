@@ -14,12 +14,22 @@ import CoreLocation
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var city: UILabel!
     @IBOutlet weak var weatherBackgroundView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var cityName: UILabel!
+    @IBOutlet weak var weatherDescription: UILabel!
     @IBOutlet weak var weatherImage: UIImageView!
     @IBOutlet weak var temperature: UILabel!
+    @IBOutlet weak var windDirection: UILabel!
+    @IBOutlet weak var windSpeed: UILabel!
+    @IBOutlet weak var humidity: UILabel!
+    @IBOutlet weak var clouds: UILabel!
+    @IBOutlet weak var pressure: UILabel!
+    @IBOutlet weak var sunrise: UILabel!
+    @IBOutlet weak var sunset: UILabel!
+    @IBOutlet weak var lastUpdatedTime: UILabel!
     
+    @IBOutlet weak var stack: UIStackView!
     @IBOutlet weak var searchPanel: UIView!
     let currentWeatherData = MutableProperty<WeaterData>(WeaterData())
     let locationManager = CLLocationManager()
@@ -37,21 +47,20 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         scrollView.addSubview(refreshControl)
         
+        stack.arrangedSubviews.forEach { $0.layer.cornerRadius = 10.0 }
         
-        weatherBackgroundView.layer.cornerRadius = 10.0
-//        weatherBackgroundView.layer.shadowRadius = 3.0
-//        weatherBackgroundView.layer.masksToBounds = false
-//        weatherBackgroundView.layer.shadowColor = UIColor.black.cgColor
-//        weatherBackgroundView.layer.shadowOffset = CGSize(width: 0, height: 0)
-//        weatherBackgroundView.layer.shadowOpacity = 0.2
-//        weatherBackgroundView.layer.shadowPath = UIBezierPath(rect: weatherBackgroundView.bounds).cgPath
-
-        
-        locationWeatherButton.layer.cornerRadius = 10.0
-        
-        cityName.reactive.text <~ currentWeatherData.signal.map { $0.city }
-        temperature.reactive.text <~ currentWeatherData.signal.map { $0.temperature }
+        city.reactive.text <~ currentWeatherData.map { $0.city+", "+$0.country }
+        weatherDescription.reactive.text <~ currentWeatherData.signal.map { $0.moreDescription.capitalizingFirstLetter() }
+        temperature.reactive.text <~ currentWeatherData.map { $0.temperature + "°" }
         weatherImage.reactive.image <~ currentWeatherData.map { $0.image }.flatten(FlattenStrategy.latest)
+        windSpeed.reactive.text <~ currentWeatherData.map { $0.windSpeed + " m/s" }
+        windDirection.reactive.text <~ currentWeatherData.map { $0.windDirection.rawValue }
+        humidity.reactive.text <~ currentWeatherData.map { $0.humidity + "%" }
+        sunrise.reactive.text <~ currentWeatherData.map { WeaterData.hoursAndMinutesFormat.string(from: $0.sunrise) }
+        sunset.reactive.text <~ currentWeatherData.map { WeaterData.hoursAndMinutesFormat.string(from: $0.sunset) }
+        pressure.reactive.text <~ currentWeatherData.map { $0.pressure + " hPa" }
+        lastUpdatedTime.reactive.text <~ currentWeatherData.map { "Last updated at "+WeaterData.hoursAndMinutesFormat.string(from: $0.lastUpdatedDate) }
+        clouds.reactive.text <~ currentWeatherData.map { $0.clouds + " %" }
         
         searchPanel.layer.shadowRadius = 4.0
         searchPanel.layer.masksToBounds = false
