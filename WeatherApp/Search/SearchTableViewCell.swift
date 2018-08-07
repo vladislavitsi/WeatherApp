@@ -19,13 +19,13 @@ class SearchTableViewCell: UITableViewCell {
     @IBOutlet weak var temperature: UILabel!
     @IBOutlet weak var imageIcon: UIImageView!
 
-    let viewModel = MutableProperty<WeaterData>(WeaterData())
+    let viewModel = MutableProperty(SearchWeatherData())
     
     func bindViewModel () {
         cityAndCountry.reactive.text <~ viewModel.signal.map { "\($0.city), \($0.country)" }
         weatherDescription.reactive.text <~ viewModel.signal.map { $0.weatherDescription }
         temperature.reactive.text <~ viewModel.signal.map { $0.temperature + "°" }
-        imageIcon.reactive.image <~ viewModel.map { $0.image }.flatten(FlattenStrategy.latest)
+        imageIcon.reactive.image <~ viewModel.map { $0.icon }
     }
     override func didMoveToSuperview() {
         bindViewModel()

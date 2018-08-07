@@ -8,18 +8,21 @@
 
 import Foundation
 import Alamofire
-import AlamofireImage
 import ObjectMapper
 import AlamofireObjectMapper
 import ReactiveSwift
 import Result
 
 class WeatherNetworker {
+    
+    private static let myappid = "9adc5a90fbbca24bbcef96af05b8b5e1"
+    
     enum RequestType: String {
         case urlWithCityName = "https://api.openweathermap.org/data/2.5/weather?q=%@&units=metric&appid=9adc5a90fbbca24bbcef96af05b8b5e1"
         case urlWithCityId = "https://api.openweathermap.org/data/2.5/weather?id=%@&units=metric&appid=9adc5a90fbbca24bbcef96af05b8b5e1"
         case urlWithCoordinates = "https://api.openweathermap.org/data/2.5/weather?lat=%@&lon=%@&units=metric&appid=9adc5a90fbbca24bbcef96af05b8b5e1"
         case searchUrl = "https://api.openweathermap.org/data/2.5/find?q=%@&type=like&mode=json&units=metric&appid=9adc5a90fbbca24bbcef96af05b8b5e1"
+        case dayWeather = "https://api.openweathermap.org/data/2.5/forecast?id=%@&mode=json&units=metric&cnt=9&appid=9adc5a90fbbca24bbcef96af05b8b5e1"
     }
     
     static func getData<T: Mappable>(for requestType: RequestType, arguments argument1: String, _ argument2: String = "" ) -> SignalProducer<T, NoError> {
@@ -31,20 +34,6 @@ class WeatherNetworker {
                     return
                 }
                 sink.send(value: loadedResult)
-                sink.sendCompleted()
-            }
-        }
-    }
-    
-    static func downloadImage(for iconId: String) -> SignalProducer<UIImage, NoError> {
-        return SignalProducer<UIImage, NoError> { sink, disposable in
-            // Alamofire image loader
-            Alamofire.request("https://openweathermap.org/img/w/\(iconId).png").responseImage { response in
-                guard let image = response.result.value else {
-                    sink.sendCompleted()
-                    return
-                }
-                sink.send(value: image)
                 sink.sendCompleted()
             }
         }

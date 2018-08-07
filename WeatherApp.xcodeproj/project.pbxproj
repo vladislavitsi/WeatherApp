@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		3216F3D3211880EE0006B16B /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3216F3D2211880EE0006B16B /* StringExtension.swift */; };
+		32A8055821197D7F00B4938E /* HourWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A8055721197D7F00B4938E /* HourWeather.swift */; };
+		32A8055A2119854700B4938E /* DayWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A805592119854700B4938E /* DayWeather.swift */; };
+		32A8055C2119856700B4938E /* MappableTransforms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A8055B2119856700B4938E /* MappableTransforms.swift */; };
+		32A8055E2119859400B4938E /* WindDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A8055D2119859400B4938E /* WindDirection.swift */; };
+		32A8056221199EEB00B4938E /* HourWeatherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A8056121199EEB00B4938E /* HourWeatherCollectionViewCell.swift */; };
+		32A805642119B74800B4938E /* SearchWeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A805632119B74800B4938E /* SearchWeatherData.swift */; };
 		32EA00002112E9C40098C0BC /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32EAFFFF2112E9C40098C0BC /* SearchViewController.swift */; };
 		32EA00032112F1E80098C0BC /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32EA00022112F1E80098C0BC /* WeatherData.swift */; };
 		32EA00052112F4770098C0BC /* WeatherNetworker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32EA00042112F4770098C0BC /* WeatherNetworker.swift */; };
@@ -25,6 +31,12 @@
 		1ABF1E56E4ABFE9F7CA65AE3 /* Pods-WeatherApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WeatherApp/Pods-WeatherApp.debug.xcconfig"; sourceTree = "<group>"; };
 		25266DA2DFD0E42D7494D7A3 /* Pods_WeatherApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeatherApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3216F3D2211880EE0006B16B /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		32A8055721197D7F00B4938E /* HourWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourWeather.swift; sourceTree = "<group>"; };
+		32A805592119854700B4938E /* DayWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayWeather.swift; sourceTree = "<group>"; };
+		32A8055B2119856700B4938E /* MappableTransforms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappableTransforms.swift; sourceTree = "<group>"; };
+		32A8055D2119859400B4938E /* WindDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindDirection.swift; sourceTree = "<group>"; };
+		32A8056121199EEB00B4938E /* HourWeatherCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourWeatherCollectionViewCell.swift; sourceTree = "<group>"; };
+		32A805632119B74800B4938E /* SearchWeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWeatherData.swift; sourceTree = "<group>"; };
 		32EA00022112F1E80098C0BC /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
 		32EA00042112F4770098C0BC /* WeatherNetworker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherNetworker.swift; sourceTree = "<group>"; };
 		32EA0008211323800098C0BC /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
@@ -60,6 +72,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		32A8055621197D3300B4938E /* Day */ = {
+			isa = PBXGroup;
+			children = (
+				32A8055721197D7F00B4938E /* HourWeather.swift */,
+				32A805592119854700B4938E /* DayWeather.swift */,
+				32A8056121199EEB00B4938E /* HourWeatherCollectionViewCell.swift */,
+			);
+			path = Day;
+			sourceTree = "<group>";
+		};
 		32EA00012112EBA00098C0BC /* Support */ = {
 			isa = PBXGroup;
 			children = (
@@ -77,6 +99,7 @@
 				32EAFFFF2112E9C40098C0BC /* SearchViewController.swift */,
 				32EA0008211323800098C0BC /* SearchResult.swift */,
 				32EA000C2113377B0098C0BC /* SearchTableViewCell.swift */,
+				32A805632119B74800B4938E /* SearchWeatherData.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -112,11 +135,14 @@
 			children = (
 				32EAFFEF2111F5130098C0BC /* ViewController.swift */,
 				32EA00022112F1E80098C0BC /* WeatherData.swift */,
+				32A8055621197D3300B4938E /* Day */,
 				32EA000A2113238E0098C0BC /* Search */,
 				32EA000B2113239F0098C0BC /* Network */,
 				32EAFFF12111F5130098C0BC /* Main.storyboard */,
 				32EA00012112EBA00098C0BC /* Support */,
 				3216F3D2211880EE0006B16B /* StringExtension.swift */,
+				32A8055B2119856700B4938E /* MappableTransforms.swift */,
+				32A8055D2119859400B4938E /* WindDirection.swift */,
 			);
 			path = WeatherApp;
 			sourceTree = "<group>";
@@ -255,13 +281,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				32EA00052112F4770098C0BC /* WeatherNetworker.swift in Sources */,
+				32A8055E2119859400B4938E /* WindDirection.swift in Sources */,
+				32A805642119B74800B4938E /* SearchWeatherData.swift in Sources */,
+				32A8056221199EEB00B4938E /* HourWeatherCollectionViewCell.swift in Sources */,
 				32EA0009211323800098C0BC /* SearchResult.swift in Sources */,
 				32EA00032112F1E80098C0BC /* WeatherData.swift in Sources */,
 				32EA00002112E9C40098C0BC /* SearchViewController.swift in Sources */,
 				3216F3D3211880EE0006B16B /* StringExtension.swift in Sources */,
 				32EAFFF02111F5130098C0BC /* ViewController.swift in Sources */,
 				32EAFFEE2111F5130098C0BC /* AppDelegate.swift in Sources */,
+				32A8055A2119854700B4938E /* DayWeather.swift in Sources */,
 				32EA000D2113377B0098C0BC /* SearchTableViewCell.swift in Sources */,
+				32A8055C2119856700B4938E /* MappableTransforms.swift in Sources */,
+				32A8055821197D7F00B4938E /* HourWeather.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

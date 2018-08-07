@@ -89,7 +89,7 @@ extension SearchViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        parentVC?.currentWeatherData.value = searchResults.weatherDataCollection.value[indexPath.row]
+        parentVC?.currentWeatherCityId.value = searchResults.weatherDataCollection.value[indexPath.row].id
         dismiss(animated: true)
     }
 }

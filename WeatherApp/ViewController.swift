@@ -16,7 +16,6 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var city: UILabel!
     @IBOutlet weak var weatherBackgroundView: UIView!
-    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var weatherDescription: UILabel!
     @IBOutlet weak var weatherImage: UIImageView!
     @IBOutlet weak var temperature: UILabel!
@@ -29,12 +28,18 @@ class ViewController: UIViewController {
     @IBOutlet weak var sunset: UILabel!
     @IBOutlet weak var lastUpdatedTime: UILabel!
     
+    @IBOutlet weak var dayWeatherCollectionView: UICollectionView!
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var stack: UIStackView!
     @IBOutlet weak var searchPanel: UIView!
-    let currentWeatherData = MutableProperty<WeaterData>(WeaterData())
-    let locationManager = CLLocationManager()
-    
     @IBOutlet weak var locationWeatherButton: UIView!
+    
+    let currentWeatherCityId = MutableProperty("")
+    
+    private let currentWeatherData = MutableProperty(WeaterData())
+    private let currentDayWeather = MutableProperty(DayWeather())
+    private let locationManager = CLLocationManager()
+    
     
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -46,13 +51,14 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         scrollView.addSubview(refreshControl)
-        
+        dayWeatherCollectionView.dataSource = self
+//        dayWeatherCollectionView.delegate = self
         stack.arrangedSubviews.forEach { $0.layer.cornerRadius = 10.0 }
         
         city.reactive.text <~ currentWeatherData.map { $0.city+", "+$0.country }
         weatherDescription.reactive.text <~ currentWeatherData.signal.map { $0.moreDescription.capitalizingFirstLetter() }
         temperature.reactive.text <~ currentWeatherData.map { $0.temperature + "°" }
-        weatherImage.reactive.image <~ currentWeatherData.map { $0.image }.flatten(FlattenStrategy.latest)
+        weatherImage.reactive.image <~ currentWeatherData.map { $0.icon }
         windSpeed.reactive.text <~ currentWeatherData.map { $0.windSpeed + " m/s" }
         windDirection.reactive.text <~ currentWeatherData.map { $0.windDirection.rawValue }
         humidity.reactive.text <~ currentWeatherData.map { $0.humidity + "%" }
@@ -68,21 +74,32 @@ class ViewController: UIViewController {
         searchPanel.layer.shadowOffset = CGSize(width: 0, height: 2)
         searchPanel.layer.shadowOpacity = 0.2
         
-        currentWeatherData.signal
-            .map { $0.id }
-            .observeValues { UserDefaults.standard.set($0, forKey: "location") }
+        currentWeatherCityId.signal
+            .observeValues { [weak self] in
+                UserDefaults.standard.set($0, forKey: "Location")
+                self?.refresh()
+        }
+        
+        currentDayWeather.signal.observeValues { [weak self] _ in
+            self?.dayWeatherCollectionView.reloadData()
+        }
         
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
 
-        refresh()
+        currentWeatherCityId.value = UserDefaults.standard.object(forKey: "Location") as? String ?? "0"
     }
     
     func refresh() {
         WeatherNetworker
-            .getData(for: .urlWithCityId, arguments: UserDefaults.standard.object(forKey: "location") as! String)
-            .startWithValues { weatherData in
-                self.currentWeatherData.value = weatherData
+            .getData(for: .urlWithCityId, arguments: currentWeatherCityId.value)
+            .startWithValues { [weak self] weatherData in
+                self?.currentWeatherData.value = weatherData
+        }
+        WeatherNetworker
+            .getData(for: .dayWeather, arguments: currentWeatherCityId.value)
+            .startWithValues { [weak self] dayWeather in
+                self?.currentDayWeather.value = dayWeather
         }
     }
 
@@ -107,6 +124,26 @@ class ViewController: UIViewController {
  
 }
 
+extension ViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return currentDayWeather.value.list.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "hourWeatherCell", for: indexPath) as! HourWeatherCollectionViewCell
+        let hourWeather = currentDayWeather.value.list[indexPath.row]
+        cell.icon.image = hourWeather.icon
+        cell.temperature.text = hourWeather.temperature + "°"
+        cell.time.text = WeaterData.hoursAndMinutesFormat.string(from: hourWeather.time)
+        return cell
+    }
+ 
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+}
+
 extension ViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let coodinates = locations.first?.coordinate else {
@@ -114,17 +151,12 @@ extension ViewController: CLLocationManagerDelegate {
         }
         WeatherNetworker
             .getData(for: WeatherNetworker.RequestType.urlWithCoordinates, arguments: coodinates.latitude.description, coodinates.longitude.description)
-            .startWithValues { (weatherData: WeaterData) in
-                self.currentWeatherData.value = weatherData
+            .startWithValues { [weak self] (weatherData: WeaterData) in
+                self?.currentWeatherCityId.value = weatherData.id
         }
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-//        WeatherNetworker
-//            .getData(for: WeatherNetworker.RequestType.urlWithCityName, arguments: "London,UK")
-//            .startWithValues { weatherData in
-//                self.currentWeatherData.value = weatherData
-//        }
     }
 }
 

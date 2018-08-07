@@ -24,7 +24,7 @@
                                 <rect key="frame" x="0.0" y="84" width="375" height="534"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="teR-6D-oSc" userLabel="Stack">
-                                        <rect key="frame" x="8" y="15" width="359" height="301.5"/>
+                                        <rect key="frame" x="8" y="15" width="359" height="431.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="czg-QQ-wm7" userLabel="Location">
                                                 <rect key="frame" x="0.0" y="0.0" width="359" height="61"/>
@@ -133,7 +133,7 @@
                                                             <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="hDN-dh-qmF">
                                                                 <rect key="frame" x="244" y="0.0" width="75" height="75"/>
                                                                 <subviews>
-                                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Pen-lY-b3L">
+                                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="01d" translatesAutoresizingMaskIntoConstraints="NO" id="Pen-lY-b3L">
                                                                         <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="75" id="jZO-Wy-c8M"/>
@@ -274,8 +274,84 @@
                                                     <constraint firstAttribute="trailing" secondItem="cFP-8Y-vRS" secondAttribute="trailing" constant="20" id="p7N-1c-ggw"/>
                                                 </constraints>
                                             </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uzQ-T2-r1I">
+                                                <rect key="frame" x="0.0" y="261.5" width="359" height="120"/>
+                                                <subviews>
+                                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="PQh-1Z-ovH">
+                                                        <rect key="frame" x="20" y="5" width="319" height="110"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="134-ei-Zib">
+                                                            <size key="itemSize" width="50" height="100"/>
+                                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                        </collectionViewFlowLayout>
+                                                        <cells>
+                                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="hourWeatherCell" id="ggp-C9-got" customClass="HourWeatherCollectionViewCell" customModule="WeatherApp" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="5" width="50" height="100"/>
+                                                                <autoresizingMask key="autoresizingMask"/>
+                                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="100"/>
+                                                                    <autoresizingMask key="autoresizingMask"/>
+                                                                    <subviews>
+                                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ehZ-qS-fPz">
+                                                                            <rect key="frame" x="5" y="5" width="50" height="91"/>
+                                                                            <subviews>
+                                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="01d" translatesAutoresizingMaskIntoConstraints="NO" id="9f5-vg-rAc">
+                                                                                    <rect key="frame" x="2" y="0.0" width="46" height="46.5"/>
+                                                                                    <constraints>
+                                                                                        <constraint firstAttribute="width" secondItem="9f5-vg-rAc" secondAttribute="height" multiplier="1:1" id="mxl-vH-rcv"/>
+                                                                                    </constraints>
+                                                                                </imageView>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="x21°" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fY7-AS-3GH">
+                                                                                    <rect key="frame" x="7" y="51.5" width="36.5" height="21.5"/>
+                                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="19"/>
+                                                                                    <nil key="highlightedColor"/>
+                                                                                </label>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="750" verticalCompressionResistancePriority="250" text="15:xx" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cz8-2S-Ess">
+                                                                                    <rect key="frame" x="11.5" y="78" width="27.5" height="12"/>
+                                                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                                                    <nil key="textColor"/>
+                                                                                    <nil key="highlightedColor"/>
+                                                                                </label>
+                                                                            </subviews>
+                                                                        </stackView>
+                                                                    </subviews>
+                                                                </view>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <constraints>
+                                                                    <constraint firstItem="ehZ-qS-fPz" firstAttribute="top" secondItem="ggp-C9-got" secondAttribute="top" constant="5" id="CYL-9S-jho"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="ehZ-qS-fPz" secondAttribute="bottom" constant="5" id="JU0-W0-KBf"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="ehZ-qS-fPz" secondAttribute="trailing" id="MUA-fw-s61"/>
+                                                                    <constraint firstItem="ehZ-qS-fPz" firstAttribute="leading" secondItem="ggp-C9-got" secondAttribute="leading" id="Wk0-H1-mr4"/>
+                                                                </constraints>
+                                                                <connections>
+                                                                    <outlet property="icon" destination="9f5-vg-rAc" id="HSs-aj-WyL"/>
+                                                                    <outlet property="temperature" destination="fY7-AS-3GH" id="76H-xg-JVd"/>
+                                                                    <outlet property="time" destination="Cz8-2S-Ess" id="kjZ-Hq-3k6"/>
+                                                                </connections>
+                                                            </collectionViewCell>
+                                                        </cells>
+                                                    </collectionView>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="PQh-1Z-ovH" firstAttribute="top" secondItem="uzQ-T2-r1I" secondAttribute="top" constant="5" id="AD0-PF-djg"/>
+                                                    <constraint firstItem="PQh-1Z-ovH" firstAttribute="leading" secondItem="uzQ-T2-r1I" secondAttribute="leading" constant="20" id="LQk-JI-gw6"/>
+                                                    <constraint firstAttribute="bottom" secondItem="PQh-1Z-ovH" secondAttribute="bottom" constant="5" id="R9E-rr-VM1"/>
+                                                    <constraint firstAttribute="height" constant="120" id="UyJ-9C-dMT"/>
+                                                    <constraint firstAttribute="trailing" secondItem="PQh-1Z-ovH" secondAttribute="trailing" constant="20" id="wjg-qS-Mfg"/>
+                                                    <constraint firstAttribute="height" constant="100" id="x1I-03-0np"/>
+                                                </constraints>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="x1I-03-0np"/>
+                                                    </mask>
+                                                </variation>
+                                            </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bEl-q5-yhh">
-                                                <rect key="frame" x="0.0" y="261.5" width="359" height="40"/>
+                                                <rect key="frame" x="0.0" y="391.5" width="359" height="40"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show weather for my location" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iu4-26-aWd">
                                                         <rect key="frame" x="0.0" y="0.0" width="359" height="40"/>
@@ -346,6 +422,7 @@
                     <connections>
                         <outlet property="city" destination="HAd-Hs-7MF" id="AGj-0b-4M7"/>
                         <outlet property="clouds" destination="1lP-4Y-DRh" id="fhl-iS-X8y"/>
+                        <outlet property="dayWeatherCollectionView" destination="PQh-1Z-ovH" id="AtK-wp-xb2"/>
                         <outlet property="humidity" destination="yFC-Yh-ol9" id="R5R-9C-ocQ"/>
                         <outlet property="lastUpdatedTime" destination="7yj-6Z-qj0" id="a4f-oM-DRJ"/>
                         <outlet property="locationWeatherButton" destination="bEl-q5-yhh" id="h12-Na-ylH"/>
@@ -375,7 +452,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1055.625" y="117.25352112676056"/>
+            <point key="canvasLocation" x="1055.2" y="116.49175412293854"/>
         </scene>
         <!--Settings-->
         <scene sceneID="8Uf-sR-jP1">
@@ -552,7 +629,7 @@
                                     <constraint firstAttribute="height" constant="100" id="LFk-ik-Uas"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchCell" rowHeight="70" id="kKF-lC-KSv" customClass="SearchTableViewCell" customModule="WeatherApp" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchCell" rowHeight="70" id="kKF-lC-KSv" customClass="SearchTableViewCell" customModule="WeatherApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kKF-lC-KSv" id="jo8-ti-FfX">
@@ -579,7 +656,7 @@
                                                                 </label>
                                                             </subviews>
                                                         </stackView>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Acd-cD-58q">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="50d" translatesAutoresizingMaskIntoConstraints="NO" id="Acd-cD-58q">
                                                             <rect key="frame" x="260.5" y="5" width="50" height="50"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="Acd-cD-58q" secondAttribute="height" multiplier="1:1" id="kuy-gY-S5F"/>
@@ -691,6 +768,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="01d" width="50" height="50"/>
+        <image name="50d" width="50" height="50"/>
         <image name="humidity" width="25" height="25"/>
         <image name="sunrise" width="50" height="50"/>
         <image name="sunset" width="50" height="50"/>

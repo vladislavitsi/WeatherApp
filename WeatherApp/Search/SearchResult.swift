@@ -12,16 +12,12 @@ import ObjectMapper
 
 class SearchResult: Mappable {
     
-    private(set) var weatherDataCollection = MutableProperty<[WeaterData]>([WeaterData]())
+    private(set) var weatherDataCollection = MutableProperty<[SearchWeatherData]>([SearchWeatherData]())
  
     func mapping(map: Map) {
         weatherDataCollection.value <- map["list"]
     }
-    
-    init() {
-        
-    }
-    
+
     required convenience init?(map: Map) {
         self.init()
     }
