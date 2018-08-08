@@ -145,6 +145,7 @@ extension ViewController: DarkThemeSupport {
         searchPanel.backgroundColor = ThemeManager.shared.get(color: .accent)
         dayWeatherCollectionView.backgroundColor = ThemeManager.shared.get(color: .accent)
         dayWeatherCollectionView.reloadData()
+        lastUpdatedTime.textColor = ThemeManager.shared.get(color: .tint)
     }
 }
 
