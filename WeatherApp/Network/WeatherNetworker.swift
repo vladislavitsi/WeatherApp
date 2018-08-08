@@ -22,7 +22,8 @@ class WeatherNetworker {
         case urlWithCityId = "https://api.openweathermap.org/data/2.5/weather?id=%@&units=metric&appid=9adc5a90fbbca24bbcef96af05b8b5e1"
         case urlWithCoordinates = "https://api.openweathermap.org/data/2.5/weather?lat=%@&lon=%@&units=metric&appid=9adc5a90fbbca24bbcef96af05b8b5e1"
         case searchUrl = "https://api.openweathermap.org/data/2.5/find?q=%@&type=like&mode=json&units=metric&appid=9adc5a90fbbca24bbcef96af05b8b5e1"
-        case dayWeather = "https://api.openweathermap.org/data/2.5/forecast?id=%@&mode=json&units=metric&cnt=9&appid=9adc5a90fbbca24bbcef96af05b8b5e1"
+        case oneDayWeather = "https://api.openweathermap.org/data/2.5/forecast?id=%@&mode=json&units=metric&cnt=9&appid=9adc5a90fbbca24bbcef96af05b8b5e1"
+        case dailyWeather = "https://api.openweathermap.org/data/2.5/forecast?id=%@&mode=json&units=metric&appid=9adc5a90fbbca24bbcef96af05b8b5e1"
     }
     
     static func getData<T: Mappable>(for requestType: RequestType, arguments argument1: String, _ argument2: String = "" ) -> SignalProducer<T, NoError> {

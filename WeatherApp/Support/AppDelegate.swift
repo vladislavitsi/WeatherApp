@@ -7,16 +7,25 @@
 //
 
 import UIKit
+import ReactiveSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    static let locationKey = "location"
+    static let isDarkModeKey = "isDarkMode"
+    
     var window: UIWindow?
 
+    var isDarkMode = MutableProperty(false)
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        if UserDefaults.standard.object(forKey: "location") == nil {
-            UserDefaults.standard.set("2643743", forKey: "location")
+        if UserDefaults.standard.object(forKey: AppDelegate.locationKey) == nil {
+            UserDefaults.standard.set("2643743", forKey: AppDelegate.locationKey)
+        }
+        if UserDefaults.standard.object(forKey: AppDelegate.isDarkModeKey) == nil {
+            UserDefaults.standard.set(false, forKey: AppDelegate.isDarkModeKey)
         }
         return true
     }
