@@ -15,6 +15,8 @@
 		320F962B211B2B2C003EAC3D /* UISearchBarExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320F962A211B2B2C003EAC3D /* UISearchBarExtension.swift */; };
 		320F962E211B2C1F003EAC3D /* PersistentDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320F962D211B2C1F003EAC3D /* PersistentDataProtocol.swift */; };
 		3216F3D3211880EE0006B16B /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3216F3D2211880EE0006B16B /* StringExtension.swift */; };
+		32374383211C23B5001F9667 /* UserDefaultsDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32374382211C23B5001F9667 /* UserDefaultsDAO.swift */; };
+		32374385211C43E1001F9667 /* ConfigurationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32374384211C43E1001F9667 /* ConfigurationController.swift */; };
 		32A8055821197D7F00B4938E /* HourWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A8055721197D7F00B4938E /* HourWeather.swift */; };
 		32A8055A2119854700B4938E /* DayWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A805592119854700B4938E /* DayWeather.swift */; };
 		32A8055E2119859400B4938E /* WindDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A8055D2119859400B4938E /* WindDirection.swift */; };
@@ -47,6 +49,8 @@
 		320F962A211B2B2C003EAC3D /* UISearchBarExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISearchBarExtension.swift; sourceTree = "<group>"; };
 		320F962D211B2C1F003EAC3D /* PersistentDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentDataProtocol.swift; sourceTree = "<group>"; };
 		3216F3D2211880EE0006B16B /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		32374382211C23B5001F9667 /* UserDefaultsDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsDAO.swift; sourceTree = "<group>"; };
+		32374384211C43E1001F9667 /* ConfigurationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationController.swift; sourceTree = "<group>"; };
 		32A8055721197D7F00B4938E /* HourWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourWeather.swift; sourceTree = "<group>"; };
 		32A805592119854700B4938E /* DayWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayWeather.swift; sourceTree = "<group>"; };
 		32A8055D2119859400B4938E /* WindDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindDirection.swift; sourceTree = "<group>"; };
@@ -172,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				320F962D211B2C1F003EAC3D /* PersistentDataProtocol.swift */,
+				32374382211C23B5001F9667 /* UserDefaultsDAO.swift */,
 			);
 			path = Persistent;
 			sourceTree = "<group>";
@@ -250,6 +255,7 @@
 				3216F3D2211880EE0006B16B /* StringExtension.swift */,
 				32A8055D2119859400B4938E /* WindDirection.swift */,
 				320F962A211B2B2C003EAC3D /* UISearchBarExtension.swift */,
+				32374384211C43E1001F9667 /* ConfigurationController.swift */,
 			);
 			path = WeatherApp;
 			sourceTree = "<group>";
@@ -340,7 +346,6 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-WeatherApp/Pods-WeatherApp-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveCocoa/ReactiveCocoa.framework",
@@ -350,7 +355,6 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveCocoa.framework",
@@ -390,8 +394,10 @@
 				32EA00052112F4770098C0BC /* WeatherNetworker.swift in Sources */,
 				32A8055E2119859400B4938E /* WindDirection.swift in Sources */,
 				32A805642119B74800B4938E /* SearchWeatherData.swift in Sources */,
+				32374383211C23B5001F9667 /* UserDefaultsDAO.swift in Sources */,
 				32A805692119DB6100B4938E /* DarkThemeSupport.swift in Sources */,
 				32A8056221199EEB00B4938E /* HourWeatherCollectionViewCell.swift in Sources */,
+				32374385211C43E1001F9667 /* ConfigurationController.swift in Sources */,
 				320F9620211B28A0003EAC3D /* DegreeToWindDirectionTransform.swift in Sources */,
 				320F962E211B2C1F003EAC3D /* PersistentDataProtocol.swift in Sources */,
 				320F9619211AD717003EAC3D /* ThemeManager.swift in Sources */,

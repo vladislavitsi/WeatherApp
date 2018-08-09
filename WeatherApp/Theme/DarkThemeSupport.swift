@@ -8,15 +8,24 @@
 
 import Foundation
 
-protocol DarkThemeSupport: class {
+protocol DarkThemeSupport {
+    var themeManager: ThemeManager { get }
+}
+
+extension DarkThemeSupport {
+    var themeManager: ThemeManager {
+        return ConfigurationController.shared.themeManager
+    }
+}
+
+protocol ThemeUpdateProtocol: class, DarkThemeSupport {
     func updateTheme()
     func bindToThemeManager()
 }
 
-extension DarkThemeSupport {
+extension ThemeUpdateProtocol {
     func bindToThemeManager() {
-        ThemeManager.shared.isDarkModeProducer
+        themeManager.isDarkModeProducer
             .startWithValues { [weak self] _ in self?.updateTheme() }
-
     }
 }

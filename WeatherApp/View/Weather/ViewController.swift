@@ -9,7 +9,6 @@
 import UIKit
 import ReactiveCocoa
 import ReactiveSwift
-import AlamofireImage
 import CoreLocation
 
 class ViewController: UIViewController {
@@ -55,7 +54,7 @@ class ViewController: UIViewController {
         
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return ThemeManager.shared.isDarkMode ? .lightContent : .default
+        return themeManager.isDarkMode ? .lightContent : .default
     }
     
     override func viewDidLoad() {
@@ -86,7 +85,7 @@ class ViewController: UIViewController {
         
         currentWeatherCityId.signal
             .observeValues { [weak self] in
-                UserDefaults.standard.set($0, forKey: "location")
+                ConfigurationController.shared.persistanceData.setObject(for: .location($0))
                 self?.refresh()
         }
         
@@ -99,7 +98,7 @@ class ViewController: UIViewController {
         
         bindToThemeManager()
 
-        currentWeatherCityId.value = UserDefaults.standard.object(forKey: "location") as? String ?? "0"
+        currentWeatherCityId.value = ConfigurationController.shared.persistanceData.getObject(for: .location) as? String ?? "0"
     }
     
     func refresh() {
@@ -136,16 +135,16 @@ class ViewController: UIViewController {
  
 }
 
-extension ViewController: DarkThemeSupport {
+extension ViewController: ThemeUpdateProtocol {
     func updateTheme() {
-        searchBar.barStyle = ThemeManager.shared.isDarkMode ? .black : .default
-        apperianceDependentLabels.forEach { $0.textColor = ThemeManager.shared.get(color: .text) }
-        stack.arrangedSubviews.forEach { $0.backgroundColor = ThemeManager.shared.get(color: .accent) }
-        view.backgroundColor = ThemeManager.shared.get(color: .backround)
-        searchPanel.backgroundColor = ThemeManager.shared.get(color: .accent)
-        dayWeatherCollectionView.backgroundColor = ThemeManager.shared.get(color: .accent)
+        searchBar.barStyle = themeManager.isDarkMode ? .black : .default
+        apperianceDependentLabels.forEach { $0.textColor = themeManager.get(color: .text) }
+        stack.arrangedSubviews.forEach { $0.backgroundColor = themeManager.get(color: .accent) }
+        view.backgroundColor = themeManager.get(color: .backround)
+        searchPanel.backgroundColor = themeManager.get(color: .accent)
+        dayWeatherCollectionView.backgroundColor = themeManager.get(color: .accent)
         dayWeatherCollectionView.reloadData()
-        lastUpdatedTime.textColor = ThemeManager.shared.get(color: .tint)
+        lastUpdatedTime.textColor = themeManager.get(color: .tint)
     }
 }
 
@@ -161,10 +160,10 @@ extension ViewController: UICollectionViewDataSource {
         cell.temperature.text = hourWeather.temperature + "°"
         cell.time.text = WeatherData.hoursAndMinutesFormat.string(from: hourWeather.time)
         
-        cell.backgroundColor = ThemeManager.shared.get(color: .accent)
-        cell.temperature.backgroundColor = ThemeManager.shared.get(color: .accent)
-        cell.temperature.textColor = ThemeManager.shared.get(color: .text)
-        cell.time.textColor = ThemeManager.shared.get(color: .text)
+        cell.backgroundColor = themeManager.get(color: .accent)
+        cell.temperature.backgroundColor = themeManager.get(color: .accent)
+        cell.temperature.textColor = themeManager.get(color: .text)
+        cell.time.textColor = themeManager.get(color: .text)
         
         return cell
     }

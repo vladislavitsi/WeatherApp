@@ -29,13 +29,11 @@ final class ThemeManager {
                                               UIColor(named: "color-tint-darkMode")!]
         
         func getColor(for darkMode: Bool) -> UIColor {
-            return darkMode ? ThemeColor.darkThemeColors[self.rawValue] : ThemeColor.lightThemeColors[self.rawValue]
+            return darkMode ? ThemeColor.darkThemeColors[rawValue] : ThemeColor.lightThemeColors[rawValue]
         }
     }
     
-    static let shared = ThemeManager()
-    
-    let isDarkModeProperty = MutableProperty(UserDefaults.standard.object(forKey: AppDelegate.isDarkModeKey) as? Bool ?? false)
+    let isDarkModeProperty: MutableProperty<Bool>
     
     var isDarkModeProducer: SignalProducer<Bool, NoError> {
         return isDarkModeProperty.producer
@@ -53,9 +51,10 @@ final class ThemeManager {
         return color.getColor(for: isDark)
     }
     
-    private init() {
+    init(_ persistanceDAO: PersistentDataProtocol) {
+        isDarkModeProperty = MutableProperty(persistanceDAO.getObject(for: .darkMode) as? Bool ?? false)
         isDarkModeProperty.signal
-            .observeValues { UserDefaults.standard.set($0, forKey: AppDelegate.isDarkModeKey) }
+            .observeValues { persistanceDAO.setObject(for: .darkMode($0)) }
     }
 }
 

@@ -10,13 +10,13 @@ import UIKit
 import ReactiveSwift
 import ReactiveCocoa
 
-class TabBarController: UITabBarController {
+class TabBarController: UITabBarController, DarkThemeSupport {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        ThemeManager.shared.isDarkModeProducer
-            .startWithValues {
-            self.tabBar.barStyle = $0 ? .black : .default
+        themeManager.isDarkModeProducer
+            .startWithValues { [weak self] isDarkMode in
+            self?.tabBar.barStyle = isDarkMode ? .black : .default
         }
     }
 }

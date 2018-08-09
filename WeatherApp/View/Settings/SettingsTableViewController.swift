@@ -17,21 +17,21 @@ class SettingsTableViewController: UITableViewController {
     
     @IBOutlet var textLabels: [UILabel]!
     @IBOutlet var cells: [UITableViewCell]!
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
-        isDarkMode.setOn(ThemeManager.shared.isDarkMode, animated: false)
-        ThemeManager.shared.isDarkModeProperty <~ isDarkMode.reactive.isOnValues
+        isDarkMode.setOn(themeManager.isDarkMode, animated: false)
+        themeManager.isDarkModeProperty <~ isDarkMode.reactive.isOnValues
         bindToThemeManager()
     }
 }
 
-extension SettingsTableViewController: DarkThemeSupport {
+extension SettingsTableViewController: ThemeUpdateProtocol {
     func updateTheme() {
-        cells.forEach { $0.backgroundColor = ThemeManager.shared.get(color: .accent) }
-        tableView.backgroundColor = ThemeManager.shared.get(color: .backround)
-        navigationController?.navigationBar.barStyle = ThemeManager.shared.isDarkMode ? .black : .default
-        textLabels.forEach { $0.textColor = ThemeManager.shared.get(color: .text) }
+        cells.forEach { $0.backgroundColor = themeManager.get(color: .accent) }
+        tableView.backgroundColor = themeManager.get(color: .backround)
+        navigationController?.navigationBar.barStyle = themeManager.isDarkMode ? .black : .default
+        textLabels.forEach { $0.textColor = themeManager.get(color: .text) }
     }
     
 }

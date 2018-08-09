@@ -97,11 +97,11 @@ extension SearchViewController: UITableViewDelegate {
     }
 }
 
-extension SearchViewController: DarkThemeSupport {
+extension SearchViewController: ThemeUpdateProtocol {
     func updateTheme() {
-        searchBar.barStyle = ThemeManager.shared.isDarkMode ? .black : .default
-        searchPanel.backgroundColor = ThemeManager.shared.get(color: .accent)
-        searchBar.textField?.textColor = ThemeManager.shared.get(color: .text)
+        searchBar.barStyle = themeManager.isDarkMode ? .black : .default
+        searchPanel.backgroundColor = themeManager.get(color: .accent)
+        searchBar.textField?.textColor = themeManager.get(color: .text)
     }
     
     
