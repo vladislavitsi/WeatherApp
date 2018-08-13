@@ -12,10 +12,10 @@ import Result
 
 struct UserDefaultsDAO: PersistentDataProtocol {
 
-    init() {}
+    var userDefaults = UserDefaults.standard
     
     func getObject(for persistentType: PersistentDataType) -> Any {
-        guard let object = UserDefaults.standard.object(forKey: persistentType.rawValue) else {
+        guard let object = userDefaults.object(forKey: persistentType.rawValue) else {
             return persistentType.defaultValue
         }
         return object
@@ -24,11 +24,11 @@ struct UserDefaultsDAO: PersistentDataProtocol {
     func setObject(for persistentType: PersistentDataTypeWithData) {
         switch persistentType {
         case .darkMode(let isDarkMode):
-            UserDefaults.standard.set(isDarkMode, forKey: PersistentDataType.darkMode.rawValue)
+            userDefaults.set(isDarkMode, forKey: PersistentDataType.darkMode.rawValue)
         case .lat(let lat):
-            UserDefaults.standard.set(lat, forKey: PersistentDataType.lat.rawValue)
+            userDefaults.set(lat, forKey: PersistentDataType.lat.rawValue)
         case .lon(let lon):
-            UserDefaults.standard.set(lon, forKey: PersistentDataType.lon.rawValue)
+            userDefaults.set(lon, forKey: PersistentDataType.lon.rawValue)
         }
     }
 }
