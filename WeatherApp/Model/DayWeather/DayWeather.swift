@@ -19,9 +19,6 @@ struct DayWeather: Mappable {
     }
     
     mutating func mapping(map: Map) {
-//        id <- (map["city.id"], DoubleToStringTransform())
-//        city <- map["city.name"]
-//        country <- map["city.country"]
         list <- map["list"]
     }
 }

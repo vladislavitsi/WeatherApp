@@ -23,7 +23,7 @@ struct HourWeather: Mappable {
     }
 
     mutating func mapping(map: Map) {
-        temperature <- (map["main.temp"], DoubleToStringTransform())
+        temperature <- (map["main.temp"], DoubleToStringRoundedTransform())
         icon <- (map["weather.0.icon"], StringToImageTransform())
         time <- (map["dt"], UnixToDateTransform())
     }

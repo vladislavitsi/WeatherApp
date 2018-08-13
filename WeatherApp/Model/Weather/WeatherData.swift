@@ -13,9 +13,8 @@ import ObjectMapper
 
 struct WeatherData: Mappable {
     
-    static let hoursAndMinutesFormat = DateFormatter(withFormat: "HH:mm", locale: Locale.current.description)
-    
-    private(set) var id = ""
+    private(set) var lat = 0.0
+    private(set) var lon = 0.0
     private(set) var city = ""
     private(set) var country = ""
     private(set) var temperature = ""
@@ -39,20 +38,21 @@ struct WeatherData: Mappable {
     
     
     mutating func mapping(map: Map) {
-        id <- (map["id"], DoubleToStringTransform())
+        lat <- map["coord.lat"]
+        lon <- map["coord.lon"]
         city <- map["name"]
         country <- map["sys.country"]
-        clouds <- (map["clouds.all"], DoubleToStringTransform())
-        temperature <- (map["main.temp"], DoubleToStringTransform())
-        windSpeed <- (map["wind.speed"], DoubleToStringTransform())
+        clouds <- (map["clouds.all"], DoubleToStringRoundedTransform())
+        temperature <- (map["main.temp"], DoubleToStringRoundedTransform())
+        windSpeed <- (map["wind.speed"], DoubleToStringRoundedTransform())
         windDirection <- (map["wind.deg"], DegreeToWindDirectionTransform())
         weatherDescription <- map["weather.0.main"]
         moreDescription <- map["weather.0.description"]
-        humidity <- (map["main.humidity"], DoubleToStringTransform())
+        humidity <- (map["main.humidity"], DoubleToStringRoundedTransform())
         lastUpdatedDate <- (map["dt"], UnixToDateTransform())
         sunrise <- (map["sys.sunrise"], UnixToDateTransform())
         sunset <- (map["sys.sunset"], UnixToDateTransform())
-        pressure <- (map["main.pressure"], DoubleToStringTransform())
+        pressure <- (map["main.pressure"], DoubleToStringRoundedTransform())
         icon <- (map["weather.0.icon"], StringToImageTransform())
     }
 }

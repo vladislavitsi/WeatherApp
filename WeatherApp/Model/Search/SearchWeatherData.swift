@@ -12,7 +12,8 @@ import ReactiveSwift
 
 struct SearchWeatherData: Mappable {
     
-    private(set) var id = ""
+    private(set) var lat = 0.0
+    private(set) var lon = 0.0
     private(set) var city = ""
     private(set) var country = ""
     private(set) var weatherDescription = ""
@@ -27,11 +28,12 @@ struct SearchWeatherData: Mappable {
     }
     
     mutating func mapping(map: Map) {
-        id <- (map["id"], DoubleToStringTransform())
+        lat <- map["coord.lat"]
+        lon <- map["coord.lon"]
         city <- map["name"]
         country <- map["sys.country"]
         weatherDescription <- map["weather.0.main"]
-        temperature <- (map["main.temp"], DoubleToStringTransform())
+        temperature <- (map["main.temp"], DoubleToStringRoundedTransform())
         icon <- (map["weather.0.icon"], StringToImageTransform())
     }
 

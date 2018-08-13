@@ -7,27 +7,33 @@
 //
 
 import Foundation
+import ReactiveSwift
+import Result
 
 enum PersistentDataTypeWithData {
-    case location(String)
+    case lat(Double)
+    case lon(Double)
     case darkMode(Bool)
 }
 
 enum PersistentDataType: String {
-    case location
     case darkMode
+    case lat
+    case lon
     
     var defaultValue: Any {
         switch self {
-        case .location:
-            return "2643743"
         case .darkMode:
             return false
+        case .lat:
+            return "51.5074"
+        case .lon:
+            return "0.1278"
         }
     }
 }
 
-protocol PersistentDataProtocol {
+protocol PersistentDataProtocol {    
     func setObject(for persistentType: PersistentDataTypeWithData)
     func getObject(for persistentType: PersistentDataType) -> Any
 }

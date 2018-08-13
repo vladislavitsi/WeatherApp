@@ -13,9 +13,10 @@ import Result
 
 class SearchViewController: UIViewController {
 
+    weak var parentVC: ViewController?
+    
     private let cellHeight = CGFloat(70)
     
-    weak var parentVC: ViewController?
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var table: UITableView!
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
@@ -92,7 +93,10 @@ extension SearchViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        parentVC?.currentWeatherCityId.value = searchResults.weatherDataCollection.value[indexPath.row].id
+        let searchResult = searchResults.weatherDataCollection.value[indexPath.row]
+        ConfigurationController.shared.persistanceData.setObject(for: .lat(searchResult.lat))
+        ConfigurationController.shared.persistanceData.setObject(for: .lon(searchResult.lon))
+        parentVC?.updateCoordinates()
         dismiss(animated: true)
     }
 }

@@ -11,6 +11,8 @@ import ReactiveCocoa
 import ReactiveSwift
 import CoreLocation
 
+fileprivate typealias Coordinates = (lat: Double, lon: Double)
+
 class ViewController: UIViewController {
 
     @IBOutlet weak var city: UILabel!
@@ -40,7 +42,7 @@ class ViewController: UIViewController {
     
     @IBOutlet var apperianceDependentLabels: [UILabel]!
     
-    let currentWeatherCityId = MutableProperty("")
+    let currentCityCoordinates = MutableProperty(Coordinates(0.0, 0.0))
     
     private let currentWeatherData = MutableProperty(WeatherData())
     private let currentDayWeather = MutableProperty(DayWeather())
@@ -71,10 +73,10 @@ class ViewController: UIViewController {
         windSpeed.reactive.text <~ currentWeatherData.map { $0.windSpeed + " m/s" }
         windDirection.reactive.text <~ currentWeatherData.map { $0.windDirection.rawValue }
         humidity.reactive.text <~ currentWeatherData.map { $0.humidity + "%" }
-        sunrise.reactive.text <~ currentWeatherData.map { WeatherData.hoursAndMinutesFormat.string(from: $0.sunrise) }
-        sunset.reactive.text <~ currentWeatherData.map { WeatherData.hoursAndMinutesFormat.string(from: $0.sunset) }
+        sunrise.reactive.text <~ currentWeatherData.map { $0.sunrise.toHoursAndMinutesFormat() }
+        sunset.reactive.text <~ currentWeatherData.map { $0.sunset.toHoursAndMinutesFormat() }
         pressure.reactive.text <~ currentWeatherData.map { $0.pressure + " hPa" }
-        lastUpdatedTime.reactive.text <~ currentWeatherData.map { "Last updated at "+WeatherData.hoursAndMinutesFormat.string(from: $0.lastUpdatedDate) }
+        lastUpdatedTime.reactive.text <~ currentWeatherData.map { "Last updated at "+$0.lastUpdatedDate.toHoursAndMinutesFormat() }
         clouds.reactive.text <~ currentWeatherData.map { $0.clouds + " %" }
         
         searchPanel.layer.shadowRadius = 4.0
@@ -83,9 +85,10 @@ class ViewController: UIViewController {
         searchPanel.layer.shadowOffset = CGSize(width: 0, height: 2)
         searchPanel.layer.shadowOpacity = 0.3
         
-        currentWeatherCityId.signal
+        currentCityCoordinates.signal
             .observeValues { [weak self] in
-                ConfigurationController.shared.persistanceData.setObject(for: .location($0))
+                ConfigurationController.shared.persistanceData.setObject(for: .lat($0.lat))
+                ConfigurationController.shared.persistanceData.setObject(for: .lon($0.lon))
                 self?.refresh()
         }
         
@@ -98,22 +101,30 @@ class ViewController: UIViewController {
         
         bindToThemeManager()
 
-        currentWeatherCityId.value = ConfigurationController.shared.persistanceData.getObject(for: .location) as? String ?? "0"
+        updateCoordinates()
     }
     
     func refresh() {
+        let currentCoordinates = currentCityCoordinates.value
         WeatherNetworker
-            .getData(for: .urlWithCityId, arguments: currentWeatherCityId.value)
+            .getData(for: .urlWithCoordinates, arguments: currentCoordinates.lat, currentCoordinates.lon)
             .startWithValues { [weak self] weatherData in
                 self?.currentWeatherData.value = weatherData
         }
         WeatherNetworker
-            .getData(for: .oneDayWeather, arguments: currentWeatherCityId.value)
+            .getData(for: .oneDayWeather, arguments: currentCoordinates.lat, currentCoordinates.lon)
             .startWithValues { [weak self] dayWeather in
                 self?.currentDayWeather.value = dayWeather
         }
     }
 
+    func updateCoordinates() {
+        let lat = ConfigurationController.shared.persistanceData.getObject(for: .lat) as? Double ?? 0.0
+        let lon = ConfigurationController.shared.persistanceData.getObject(for: .lon) as? Double ?? 0.0
+        currentCityCoordinates.value = (lat, lon)
+
+    }
+    
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
         refresh()
         refreshControl.endRefreshing()
@@ -124,7 +135,7 @@ class ViewController: UIViewController {
 
     }
     // MARK: - Navigation
-     
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let searchVC = segue.destination as? SearchViewController else {
@@ -132,8 +143,7 @@ class ViewController: UIViewController {
         }
         searchVC.parentVC = self
     }
- 
-}
+ }
 
 extension ViewController: ThemeUpdateProtocol {
     func updateTheme() {
@@ -158,7 +168,7 @@ extension ViewController: UICollectionViewDataSource {
         let hourWeather = currentDayWeather.value.list[indexPath.row]
         cell.icon.image = hourWeather.icon
         cell.temperature.text = hourWeather.temperature + "°"
-        cell.time.text = WeatherData.hoursAndMinutesFormat.string(from: hourWeather.time)
+        cell.time.text = hourWeather.time.toHoursAndMinutesFormat()
         
         cell.backgroundColor = themeManager.get(color: .accent)
         cell.temperature.backgroundColor = themeManager.get(color: .accent)
@@ -179,11 +189,7 @@ extension ViewController: CLLocationManagerDelegate {
         guard let coodinates = locations.first?.coordinate else {
             return
         }
-        WeatherNetworker
-            .getData(for: WeatherNetworker.RequestType.urlWithCoordinates, arguments: coodinates.latitude.description, coodinates.longitude.description)
-            .startWithValues { [weak self] (weatherData: WeatherData) in
-                self?.currentWeatherCityId.value = weatherData.id
-        }
+        currentCityCoordinates.value = (coodinates.latitude, coodinates.longitude)
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

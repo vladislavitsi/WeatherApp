@@ -35,5 +35,3 @@ extension SettingsTableViewController: ThemeUpdateProtocol {
     }
     
 }
-
-

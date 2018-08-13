@@ -2,14 +2,14 @@
 //  DoubleToStringTransform.swift
 //  WeatherApp
 //
-//  Created by Uladzislau Kleshchanka on Aug/10/2018.
+//  Created by Uladzislau Kleshchanka on Aug/08/2018.
 //  Copyright © 2018 Uladzislau Kleshchanka. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import ObjectMapper
 
-class DoubleToStringTransform: TransformType {
+class DoubleToStringRoundedTransform: TransformType {
     typealias Object = String
     
     typealias JSON = Double
@@ -18,7 +18,7 @@ class DoubleToStringTransform: TransformType {
         guard let value = value as? Double else {
             return nil
         }
-        return String(value)
+        return String(Int(round(value)))
     }
     
     func transformToJSON(_ value: DoubleToStringRoundedTransform.Object?) -> DoubleToStringRoundedTransform.JSON? {

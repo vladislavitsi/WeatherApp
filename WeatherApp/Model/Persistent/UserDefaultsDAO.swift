@@ -7,8 +7,12 @@
 //
 
 import Foundation
+import ReactiveSwift
+import Result
 
 struct UserDefaultsDAO: PersistentDataProtocol {
+
+    init() {}
     
     func getObject(for persistentType: PersistentDataType) -> Any {
         guard let object = UserDefaults.standard.object(forKey: persistentType.rawValue) else {
@@ -21,8 +25,10 @@ struct UserDefaultsDAO: PersistentDataProtocol {
         switch persistentType {
         case .darkMode(let isDarkMode):
             UserDefaults.standard.set(isDarkMode, forKey: PersistentDataType.darkMode.rawValue)
-        case .location(let location):
-            UserDefaults.standard.set(location, forKey: PersistentDataType.location.rawValue)
+        case .lat(let lat):
+            UserDefaults.standard.set(lat, forKey: PersistentDataType.lat.rawValue)
+        case .lon(let lon):
+            UserDefaults.standard.set(lon, forKey: PersistentDataType.lon.rawValue)
         }
     }
 }
